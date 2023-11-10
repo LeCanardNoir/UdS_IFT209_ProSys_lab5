@@ -45,7 +45,7 @@ Random_Loop:
 		lsr		x27, x22, #16			// met dans x27 les bits du seed en commençant au bit 16
 
 		mov		x15, #1
-		adc		x16, xzr, x17			//À la première itération, x16 vaut 11. Aux autres itérations, x16 vaut 10
+		adcs	x16, xzr, x17			//À la première itération, x16 vaut 11. Aux autres itérations, x16 vaut 10
 		lsl		x15, x15, x16
 		sub		x15, x15, #1			//x15 contient les un nombre avec les 10 (ou 11) bits moins significatifs à 1
 
@@ -53,7 +53,7 @@ Random_Loop:
 		and		x27, x27, x15			//On garde dans x27 les 10 (ou 11) bits les moins significatifs
 		orr		x25, x25, x27			//Et on les insère dans le résultat
 
-		subs	x28, x28, #1			//À toutes les itérations, sauf la première, on reset le carry out bit
+		sub		x28, x28, #1			//À toutes les itérations, sauf la première, on reset le carry out bit
 
 		b.al	Random_Loop
 
