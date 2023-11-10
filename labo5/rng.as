@@ -36,6 +36,7 @@ Random:
 		mov		x28, #3					//x28 est le nombre d'itérations restantes
 		mov		x25, xzr				//x25 est le résultat
 		cmp		x28, #1					//3-2 devrait set le carry out bit
+		mov		x17, #10
 
 Random_Loop:
 		cbz		x28, Random_LoopEnd
@@ -44,7 +45,7 @@ Random_Loop:
 		lsr		x27, x22, #16			// met dans x27 les bits du seed en commençant au bit 16
 
 		mov		x15, #1
-		adc		x16, xzr, #10			//À la première itération, x16 vaut 11. Aux autres itérations, x16 vaut 10
+		adc		x16, xzr, x17			//À la première itération, x16 vaut 11. Aux autres itérations, x16 vaut 10
 		lsl		x15, x15, x16
 		sub		x15, x15, #1			//x15 contient les un nombre avec les 10 (ou 11) bits moins significatifs à 1
 
@@ -58,7 +59,8 @@ Random_Loop:
 
 
 Random_LoopEnd:
-
+		str		w22, [x19]
+		mov		x0, x25
 
 
 		RESTORE
