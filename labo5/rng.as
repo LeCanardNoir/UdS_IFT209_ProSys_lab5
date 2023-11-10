@@ -28,6 +28,10 @@
 
 Random:
 		SAVE
+		mov		x19, x0					// Sauvegarde l'adresse Memoire de x0
+		mov		w20, w1					// Constante multiplicative
+		mov		w21, w2					// Constante additive 
+
 		
 
 		RESTORE
