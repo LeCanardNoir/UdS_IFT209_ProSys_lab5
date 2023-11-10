@@ -29,9 +29,14 @@
 Random:
 		SAVE
 		mov		x19, x0					// Sauvegarde l'adresse Memoire de x0
-		mov		w20, w1					// Constante multiplicative
-		mov		w21, w2					// Constante additive 
+		mov		w20, w1					// Constante multiplicative (m)
+		mov		w21, w2					// Constante additive (n)
+		ldr		x23, [x19, #0]			// seed
 
+		madd	x24, x23, x20, x21		// ( seed x m ) + n = (s1)
+		madd	x25, x24, x20, x21		// ( seed x m ) + n = (s2)
+		madd	x26, x25, x20, x21		// ( seed x m ) + n = (s3)
+		
 		
 
 		RESTORE
